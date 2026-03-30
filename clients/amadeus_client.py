@@ -69,7 +69,7 @@ class AmadeusClient:
         else:
             return response.json()['data'][0]['iataCode']
 
-    def get_flights(self, original_city, destination_city, departure_date, return_date=None, adult_number=1, currency_code="EUR", nonstop=True):
+    def get_flights(self, original_city, destination_city, departure_date, return_date=None, adult_number=1, currency_code="EUR"):
         """
         Searches for available flight offers based on the provided criteria.
 
@@ -80,7 +80,6 @@ class AmadeusClient:
             return_date (str | None): Return date in YYYY-MM-DD format (optional).
             adult_number (int): Number of adult passengers. Default is 1.
             currency_code (str): Currency code for pricing (e.g., "EUR"). Default is "EUR".
-            nonstop (bool): Direct flight. Default is True.
         Returns:
             list[dict] | None:
                 - list[dict]: A list of flight offers if results are found.
@@ -93,7 +92,7 @@ class AmadeusClient:
             "destinationLocationCode": dest_code,
             "departureDate": departure_date,
             "adults": adult_number,
-            "nonStop": nonstop,
+            #"nonStop": nonstop,
             "currencyCode": currency_code,
             #"max": "10",
         }
@@ -175,7 +174,7 @@ class AmadeusClient:
             check_in (str): Check-in date in YYYY-MM-DD format.
             check_out (str): Check-out date in YYYY-MM-DD format.
             city_name (str | None): Name of the city where hotels should be searched.
-            geocode (tuple[float, float] | None): Geographic coordinates in the form (longitude, latitude).
+            geocode (tuple[float, float] | None): Geographic coordinates in the form (lat, lng).
             price_range (str | None): Desired price range for hotels (optional).
             ratings (list[str] | int | None): Desired hotel rating(s) in stars (optional).
             adults (int): Number of adult guests. Default is 1.
@@ -222,3 +221,4 @@ class AmadeusClient:
                 except KeyError: #if there is no phone number
                     hotel_name_price_contact.append((hotel["hotel"]["name"],float(hotel['offers'][0]["price"]["total"])))
             return hotel_name_price_contact
+
