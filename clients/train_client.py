@@ -6,7 +6,6 @@ class TrainClient:
     def __init__(self):
         # BeautifulSoup / XML
         self.price = 0.30 # RON / km
-        self.price = self.price / 5 # EUR / km
         self.routes = self.get_routes()
         self.stations = self.get_train_stations()
         self.graph = {}
@@ -75,7 +74,6 @@ class TrainClient:
 
             self.graph[origin].append((destination, km, time))
             self.graph[destination].append((origin, km, time))
-
 
     def shortest_distance(self, start, end):
         """
